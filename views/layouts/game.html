@@ -1,0 +1,145 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/css/game.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/css/chat.css" type="text/css" media="all">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="/js/vendor/socket-io-client.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+	<script type="text/javascript" src="/js/vendor/modal.js"></script>
+	<script src="/js/blurbs.js"></script>
+	<script src="/js/preload.js"></script>
+	<script src="/js/main.js"></script>
+	<script src="/js/lib/regions/Town.js"></script>
+	<script src="/js/lib/regions/Fields.js"></script>
+	<script src="/js/lib/regions/Forest.js"></script>
+	<script src="/js/lib/regions/Mounds.js"></script>
+	<script src="/js/lib/regions/Mountains.js"></script>
+	<script src="/js/lib/regions/Market.js"></script>
+	<script src="/js/lib/regions/Docks.js"></script>
+	<script src="/js/lib/regions/Shangala.js"></script>
+	<script src="/js/lib/regions/Brasil.js"></script>
+	<script src="/js/lib/regions/Azteca.js"></script>
+	<script src="/js/lib/regions/Town.js"></script>
+	<script src="/js/lib/Region.js"></script>
+	<script src="/js/lib/RegionFactory.js"></script>
+	
+	<script>
+	var Socket = io.connect();
+	var DC = {
+	 init: () => {
+	  DC.Tpl.init();
+	  DC.Tpl.buildChat();
+	  DC.controllers.Player.init();
+	 },
+	  models: {
+	   User: {
+	    id: {{User.id}},
+	    name: '{{User.name}}',
+	    firstRun: {{User.firstRun}},
+	    hasChar: {{User.hasChar}},
+	    chat: {{User.chat}},
+	    token: '',
+	   },
+	   Player: {
+	    handlers: [],
+	    owner: {{Player.owner}},
+	    rankString: '{{Player.rankString}}',
+	    nameAndRank: '{{Player.nameRankStr}}',
+	    region: '{{Player.region}}',
+	    charclass: '{{Player.charClass}}',
+	    background: '{{Player.background}}',
+	    guild: {{Player.guild}},
+	    effects: '{{Player.effects}}',
+	    stats: {
+	     guts: {{Player.stats.guts}},
+	     gutsMax: {{Player.stats.gutsMax}},
+	     wits: {{Player.stats.wits}},
+	     witsMax: {{Player.stats.witsMax}},
+	     charm: {{Player.stats.charm}},
+	     charmMax: {{Player.stats.charmMax}},
+	     attack: {{Player.stats.attack}},
+	     defend: {{Player.stats.defend}},
+	     skill: {{Player.stats.skill}},
+	    },
+	    skills: {
+	     fighter: {
+	      skill: {{Player.skills.fighter.skill}},
+	      max: {{Player.skills.fighter.max}}
+	     },
+	     magic: {
+	      skill: {{Player.skills.magic.skill}},
+	      max: {{Player.skills.magic.max}}
+	     },
+	     trade: {
+	      skill: {{Player.skills.trade.skill}},
+	      max: {{Player.skills.trade.max}}
+	     }
+	    },
+	    level: {{Player.level}},
+	    experience: {{Player.experience}},
+	    quests: {{Player.quests}},
+	    questsMax: {{Player.questsMax}},
+	    cash: {{Player.cash}},
+	    rank: {{Player.rank}},
+	    storage: {{Player.storage}},
+	    storageMax: {{Player.storageMax}},
+	    fame: {{Player.fame}},
+	    favor: {{Player.favor}},
+	    skilled: {{Player.skilled}},
+	    cashToday: 0,
+	    expToday: 0,
+	    gutsToday: 0,
+	    witsToday: 0,
+	    charmToday: 0,
+	    totalGuts: 0,
+	    totalWits: 0,
+	    totalCharm: 0,
+	    totalSkill: 0,
+	    totalAttack: 0,
+	    totalDefend: 0,
+	    questsToday: 0,
+	    totalGuildSkills: 0
+	   },
+	   Chat: [
+	   {{#each Chat}}
+	   {
+	    id: {{this.id}},
+	    sender: {{this.sender}},
+	    senderName: "{{this.senderName}}",
+	    time: {{this.time}},
+	    channel: {{this.channel}},
+	    message: {{this.message}},
+	   }{{#unless @last}},{{/unless}}
+	   {{/each}}
+	   ]
+	  }
+	}
+};
+</script>
+<script src="/js/Game.js"></script>
+<script src="/js/shop.js"></script>
+<script src="/js/controllers/inventory.js"></script>
+<script src="/js/controllers/player.js"></script>
+<script src="/js/controllers/creation.js"></script>
+
+<script>	document.addEventListener( 'DOMContentLoaded', () => {
+	  DC.init();
+	  DC.Game.init();
+  }, false);
+	</script>
+    </head>
+    <body>
+		<div class="container-fluid mt-auto h-100">
+        {{{body}}}
+        </div>
+    </body>
+</html>
