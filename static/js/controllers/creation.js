@@ -2,32 +2,41 @@ DC.Creation = {
  freePoints: 20,
  charClass: 'peasant',
  lastPointsUsed: 0,
- init: function(callback){
-  Socket.emit('tpl-creation', null);
-  Socket.on('tpl-creation-result', (data) => {
-   var html = DC.Tpl.build(data);
-   DC.Game.container.html(html);
-   
-   $(document).on('click', '.creationStatClick', function(e){
-    e.preventDefault();
-    
-    var type = $(this).attr('data-type');
-    var inc = $(this).attr('data-inc');
-    
-    DC.Creation.statClick(type, inc);
-   });
-   
-   $(document).on('mouseup', '.creationClass', function(e){
-    e.preventDefault();
-    
-    var type = $(this).val();
-    
-    if(DC.Creation.lastPointsUsed > 0){
-     var addedBack = DC.Creation.freePoints + DC.Creation.lastPointsUsed;
-     
-     DC.Creation.pointChange(addedBack);
-     DC.Creation.lastPointsUsed = 0;
-    }
+ init: function(){
+  DC.Creation.listeners.init();
+  DC.Creation.events.init();
+  
+  Socket.emit('player-creation', null);
+	},
+	listeners: {
+	 init: () => {
+	  Socket.on('player-creation-result', (data) => {
+	   var html = DC.Tpl.build(data);
+	   DC.Game.container.html(html);
+	  });
+	 }
+	},
+	events: {
+	 init: () => {
+	  $(document).on('click', '.creationStatClick', function(e){
+	   e.preventDefault();
+	   
+	   var type = $(this).attr('data-type');
+	   var inc = $(this).attr('data-inc');
+	   DC.Creation.statClick(type, inc);
+	  });
+	  
+	  $(document).on('mouseup', '.creationClass', function(e){
+	   e.preventDefault();
+	   
+	   var type = $(this).val();
+	   
+	   if(DC.Creation.lastPointsUsed > 0){
+	    var addedBack = DC.Creation.freePoints + DC.Creation.lastPointsUsed;
+	    
+	    DC.Creation.pointChange(addedBack);
+	    DC.Creation.lastPointsUsed = 0;
+	   }
     
     var query,
      cost = 1,
@@ -73,34 +82,35 @@ DC.Creation = {
       DC.Creation.pointChange(cause);
      }
     });
-    
-    $(document).on('click', '#creationSubmit', function(e){
-     e.preventDefault();
-				
-				if(parseInt($('#freePts').text()) > 0){
-				 DC.Tpl.buildModal("error", "<strong>You still have free points to distribute.</strong>");
-				 return;
-				}
-				
-				var guts = parseInt($('#gutsStat').text());
-				var wits = parseInt($('#witsStat').text());
-				var charm = parseInt($('#charmStat').text());
-				var cash = parseInt($('#cashStat').text());
-				var bg = $('#background').text();
-				
-				var createObj = {
-				 guts: guts,
-				 wits: wits,
-				 charm: charm,
-				 cash: cash,
-				 charClass: DC.Creation.charClass,
-				 bg: bg
-				};
-				
-				Socket.emit('player-create', createObj);
-			});
-		});
-		callback();
+	  
+	  $(document).on('click', '#creationSubmit', function(e){
+	   e.preventDefault();
+	   
+	   if(parseInt($('#freePts').text()) > 0){
+	    DC.Tpl.buildModal("error", "<strong>You still have free points to distribute.</strong>");
+	    return;
+	   }
+	   
+	   var guts = parseInt($('#gutsStat').text());
+	   var wits = parseInt($('#witsStat').text());
+	   var charm = parseInt($('#charmStat').text());
+	   var cash = parseInt($('#cashStat').text());
+	   var bg = $('#background').text();
+	   
+	   var createObj = {
+	    owner: DC.models.User.id,
+	    guts: guts,
+	    wits: wits,
+	    charm: charm,
+	    cash: cash,
+	    charClass: DC.Creation.charClass,
+	    bg: bg
+	   };
+	   
+	   Socket.emit('player-create', createObj);
+	   DC.Game.statScreen();
+	  });
+	 }
 	},
 	statClick: function(type, inc){
 	 var statPts = parseInt($('#'+type+'Stat').text());

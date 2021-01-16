@@ -3,6 +3,12 @@ for(var i = 0; i < IMGS.length; i++){
  $('head').append(preImg);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+ 
+ fbInit(document, 'script', 'facebook-jssdk');
+ DC.init();
+}, false);
+
 $(function(){
  var loc = window.location.href;
  if(/login/.test(loc)){
@@ -15,7 +21,7 @@ $(function(){
  }
 });
 
-var Socket = io.connect();
+var Socket = io.connect('http://localhost:33030', { query: {DC.models.User.token} });
 
 function setCookie(name,value,days) {
  var expires = "";
@@ -41,3 +47,19 @@ function getCookie(name) {
 function eraseCookie(name) {
  document.cookie = name+'=; Max-Age=-99999999;';  
 }
+
+function fbInit(d, s, id){
+ var js, fjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) return;
+ js = d.createElement(s);
+ js.id = id;
+ js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&autoLogAppEvents=1&version=v2.12&appId=199922540602335';
+ fjs.parentNode.insertBefore(js, fjs);
+}
+
+   
+   
+   
+   
+   
+   

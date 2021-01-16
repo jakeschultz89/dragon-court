@@ -54,31 +54,32 @@ var Router = function(io){
     skills: {
      fighter: {
       skill: 0,
-      max: 0,
+      max: 0
      },
      magic: {
       skill: 0,
-      max: 0,
+      max: 0
      },
      trade: {
       skill: 0,
-      max: 0,
+      max: 0
      }
     },
     level: 1,
     experience: 0,
     quests: 5,
-    max_quests: 5,
+    questsMax: 5,
     storage: 0,
-    max_storage: 20,
+    storageMax: 20,
     cash: 0,
     rank: 0,
     fame: 0,
     favor: 0,
-    skilled: 0,
+    skilled: 0
    };
    
    data.Chat = {};
+   
    ChatService.bulk(User.chat, (result) => {
     data.Chat = result;
     

@@ -33,19 +33,6 @@ const io = require('socket.io')(server);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-var session = session({
-	secret: process.env.SECRET,
-	resave: true,
-	saveUninitialized: true
-});
-
-var sharedsession = require("express-socket.io-session");
-app.use(session);
-
-io.use(sharedsession(session, {
-	autoSave:true
-}));
-
 app.use(express.static(__dirname + '/static/'));
 
 handlebars = hb.create({
@@ -91,19 +78,30 @@ handlebars = hb.create({
 app.engine('html', handlebars.engine); app.set('view engine', 'html');
 
 var game = require('./lib/game');
-var TplController = require('./lib/controllers/tpl')(game);
 var UserController = require('./lib/controllers/user');
-var PlayerController = require('./lib/controllers/player');
+var PlayerController = require('./lib/controllers/player')(game);
+var ShopController = require('./lib/controllers/shop');
+var EncounterController = require('./lib/controllers/encounter');
 
 const routes = require("./routes")(io);
 app.use(routes);
 
-io.on('connection', function(socket){
-	console.log('User connected');
-	
-	TplController.init(socket);
+io.use(function(socket, next){
+ if(socket.handshake.query && socket.handshake.query.token){
+  jwt.verify(socket.handshake.query.token, process.env.SECRET, function(err, decoded){
+   if (err) return
+   next(new Error('Authentication error'));
+   socket.decoded = decoded;
+   next();
+  });
+ }else{
+  next(new Error('Authentication error'));
+ }
+}).on('connection', function(socket){
 	UserController.init(socket);
 	PlayerController.init(socket);
+	ShopController.init(socket);
+	EncounterController.init(socket);
 });
 
 server.listen(process.env.PORT, function () {

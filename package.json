@@ -5,10 +5,13 @@
   "main": "app.js",
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "start": "node app.js"
+    "start": "node dc.js"
   },
   "author": "Jason O'Neal",
   "license": "ISC",
+  "nodemonConfig": {
+   "ignore": ["static/*", "views/*"]
+  },
   "dependencies": {
     "async": "^3.0.1",
     "bcrypt": "^5.0.0",

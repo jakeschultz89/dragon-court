@@ -44,6 +44,6 @@ class Fields {
 	}
 	
 	build(){
-		Socket.emit('tpl-region', 'fields');
+		Socket.emit('region-init', 'fields');
 	}
 }

@@ -6,32 +6,35 @@
 	<meta charset="iso-8859-1">
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<style>
+	@font-face {
+	 font-family: "Lombardic";
+	 src: url("/fonts/Lombardic.ttf") format("truetype");
+	}
+	@font-face {
+	 font-family: "Jarrow";
+	 src: url("/fonts/Jarrow.ttf") format("truetype");
+	}
+	</style>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
 	<script type="text/javascript" src="/js/vendor/socket-io-client.js"></script>
-	<script type="text/javascript" src="/js/vendor/modal.js"></script>
 	
 	<script>
-	var Socket = io.connect();
 	var DC = {
 	  host: '{{globalVar "host"}}',
-	  port: {{globalVar "port"}},
-	  Storage: window.localStorage,
-	  init: () => {
-	    
-	    let e = document.createElement('style');
-	    e.innerHTML = '@font-face { font-family: "Lombardic"; src: url("/fonts/Lombardic.ttf") format("truetype"); }'+
-	    '@font-face { font-family: "Jarrow"; src: url("/fonts/Jarrow.ttf") format("truetype"); }';
-	    document.body.appendChild(e);
-	    
-	    $(document).on($.modal.AFTER_CLOSE, function(event, modal){
-	      $(modal.$elm[0]).remove();
-	    });
-	  },
-	  buildTemplate: (data) => {
-	    var template = Handlebars.compile(data.html);
-	    return template(data.data);
-	  },
-	  models: {
+	  port: {{globalVar "port"}}
+	 };
+	</script>
+	<script src="/js/preload.js"></script>
+	<script src="/js/main.js"></script>
+	<script src='/js/controllers/user.js'></script>
+	<script>
+	  DC.init = () => {
+	   DC.User.listeners.init();
+	   DC.User.events.init();
+	  };
+	  DC.models = {
 	    User: {
 	      id: 0,
 	      name: '',
@@ -39,109 +42,13 @@
 	      hasChar: 0,
 	      chat: 0,
 	      token: '',
-	      getId: function(){
-	        return this.id;
-	      },
-	      getName: function(){
-	        return this.name;
-	      },
-	      getFirstRun: function(){
-	        return this.firstRun;
-	      },
-	      getHasChar: function(){
-	        return this.hasChar;
-	      },
-	      getChat: function(){
-	        return this.chat;
-	      },
-	      getToken: function(){
-	        return this.token;
-	      },
-	      load: () => {
-	        DC.models.User.id = localStorage.userId;
-	        DC.models.User.name = localStorage.userName;
-	        DC.models.User.firstRun = localStorage.userFirstRun;
-	        DC.models.User.hasChar = localStorage.userHasChar;
-	        DC.models.User.chat = localStorage.userChat;
-	        DC.models.User.token = localStorage.userToken;
-	      }
 	    }
-	  },
-	  controllers: {
-	    User: {
-	      init: () => {
-	        Socket.on("login-success", (data) => {
-	          DC.models.User.id = data.user.id;
-	          DC.models.User.name = data.user.name;
-	          DC.models.User.firstRun = data.user.firstRun;
-	          DC.models.User.hasChar = data.user.hasChar;
-	          DC.models.User.chat = data.user.chat;
-	          DC.models.User.token = data.token;
-	          
-	          DC.Storage.setItem('userId', DC.models.User.id);
-	          DC.Storage.setItem('userName', DC.models.User.name);
-	          DC.Storage.setItem('userFirstRun', DC.models.User.firstRun);
-	          DC.Storage.setItem('userHasChar', DC.models.User.hasChar);
-	          DC.Storage.setItem('userChat', DC.models.User.chat);
-	          DC.Storage.setItem('userToken', DC.models.User.token);
-	        
-	          setCookie('uid', DC.models.User.getId(), 365);
-	        
-	          window.location = "http://"+DC.host+":"+DC.port+"/game";
-	      });
-	      
-	        Socket.on("login-failed", (data) => {
-	          window.location = "http://"+DC.host+":"+DC.port+data.redirect;
-	        });
-	      
-	        Socket.on("register-success", (data) => {
-	          window.location = "http://"+DC.host+":"+DC.port+data.redirect;
-	        });
-	      
-	        Socket.on("logout-success", (data) => {
-	          DC.Storage.removeItem("userId");
-	          DC.Storage.removeItem("userName");
-	          DC.Storage.removeItem("userFirstRun");
-	          DC.Storage.removeItem("userHasChar");
-	          DC.Storage.removeItem("userChat");
-	          DC.Storage.removeItem("userToken");
-	        });
-	      
-	        Socket.on("user-update-incoming", (data) => {
-	      
-	        });
-	      
-	        Socket.on("user-get-success", (data) => {
-	          DC.models.User.id = data.user.id;
-	          DC.models.User.name = data.user.name;
-	          DC.models.User.firstRun = data.user.first_run;
-	          DC.models.User.hasChar = data.user.has_char;
-	          DC.models.User.chat = data.user.chat;
-	          DC.models.User.token = data.token;
-	        });
-	      }
-	    }
-	  }
-	};
-	
-	 document.addEventListener( 'DOMContentLoaded', () => {
-	 DC.init();
-	 DC.controllers.User.init();
-}, false);
+	  };
 	</script>
 	<link rel="stylesheet" href="/css/site.css">
 </head>
 <body>
 <div id="fb-root"></div>
-<script>
-(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&autoLogAppEvents=1&version=v2.12&appId=199922540602335';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-100 flex-column">
 	<header class="masthead mb-auto">
@@ -169,58 +76,5 @@
 	</footer>
 	<!-- Footer -->
 </div>
-
-<script>
-$(document).on('click', '#register', function(e){
-	e.preventDefault();
-	
-	var name = $('input[name=username]').val(),
-		email = $('input[name=email]').val(),
-		password = $('input[name=password]').val();
-	
-	if(name == '' || email == '' || password == ''){
-		// modal showing error
-	}else{
-		Socket.emit('user-register', {name: name, email: email, password: password});
-	}
-});
-
-$(document).on('click', '#login', function(e){
-	e.preventDefault();
-	
-	var name = $('input[name=username]').val(),
-		password = $('input[name=password]').val();
-	
-	if(name == '' || password == ''){
-		// modal showing error
-		console.log('login error');
-	}else{
-		Socket.emit('user-login', {name: name, password: password});
-	}
-});
-
-function setCookie(name,value,days) {
-    var expires = "";
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for(var i=0;i < ca.length;i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') c = c.substring(1,c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
-    }
-    return null;
-}
-function eraseCookie(name) {   
-    document.cookie = name+'=; Max-Age=-99999999;';  
-}
-</script>
 </body>
 </html>

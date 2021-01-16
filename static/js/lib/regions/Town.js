@@ -34,7 +34,7 @@ class Town {
 	}
 	
 	build(){
-		Socket.emit('tpl-region', 'town');
+		Socket.emit('region-init', 'town');
 	}
 	
 	get id(){
