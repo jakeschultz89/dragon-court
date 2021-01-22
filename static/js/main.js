@@ -21,7 +21,7 @@ $(function(){
  }
 });
 
-var Socket = io.connect('http://localhost:33030', { query: {DC.models.User.token} });
+var Socket = io.connect();
 
 function setCookie(name,value,days) {
  var expires = "";
@@ -56,10 +56,3 @@ function fbInit(d, s, id){
  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&autoLogAppEvents=1&version=v2.12&appId=199922540602335';
  fjs.parentNode.insertBefore(js, fjs);
 }
-
-   
-   
-   
-   
-   
-   

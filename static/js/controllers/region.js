@@ -14,6 +14,7 @@ DC.Region = {
     e.preventDefault();
     
     var type = $(this).data().id;
+    console.log(type);
     DC.Shop.init(type);
    });
    
@@ -21,18 +22,20 @@ DC.Region = {
     e.preventDefault();
     
     var id = $(this).data().id;
+    console.log(id);
     DC.Region.init(id);
    });
    
-   $(document).on('click', function(e){
+   $(document).on('click', '.quest', function(e){
     e.preventDefault();
     
     var r = $(this).data().id;
-    DC.Encounter.init(id);
+    DC.Encounter.init(r);
    });
   }
  },
  init: (id) => {
+  console.log("region init");
   DC.models.Player.region = id;
   DC.Region.data = RegionFactory.get(DC.models.Player.region);
   DC.Region.data.build();

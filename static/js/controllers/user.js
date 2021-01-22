@@ -19,7 +19,7 @@ DC.User = {
 	  });
 	      
 	  Socket.on("login-failed", (data) => {
-	   DC.tpl.buildModal("error", data);
+	   DC.Tpl.buildModal("error", data);
 	  });
 	      
 	  Socket.on("register-success", (data) => {

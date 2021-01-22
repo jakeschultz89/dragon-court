@@ -10,25 +10,29 @@ DC.Game = {
  },
  listeners: {
   init: () => {
-   Socket.on('game-start-cmd', (data) => {
-    DC.Game.statScreen();
-   });
-   
    Socket.on('player-awaken-result', (data) => {
     DC.Game.container.html(DC.Tpl.build(data));
    });
   }
  },
  init: ()=> {
+  console.log('Game init');
+  DC.Game.events.init();
+  DC.Game.listeners.init();
+
   DC.Player.init();
   DC.Inventory.init();
   DC.Region.listeners.init();
   DC.Region.events.init();
-  DC.Encounter.init();
   DC.Shop.listeners.init();
-  DC.Chat.init();
+  //DC.Chat.init();
+  
   DC.Game.container = $('#gameDiv');
-	 DC.Game.start();
+  gameStart(() => {
+		  setVisible('#gameDiv', true);
+		  setVisible('#loading', false);
+		  DC.Game.start();
+		 });
 	},
 	start: () => {
 	 if(!DC.models.User.hasChar){
@@ -89,7 +93,7 @@ DC.Game = {
 	 }, 1500);
 	},
 	play: () => {
-	 DC.Region.init(DC.models.Player.region);
+	console.log("play"); DC.Region.init(DC.models.Player.region);
 	 DC.Player.buildStats();
 	}
 };

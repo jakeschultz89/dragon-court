@@ -79,28 +79,19 @@ app.engine('html', handlebars.engine); app.set('view engine', 'html');
 
 var game = require('./lib/game');
 var UserController = require('./lib/controllers/user');
-var PlayerController = require('./lib/controllers/player')(game);
+var PlayerController = require('./lib/controllers/player');
 var ShopController = require('./lib/controllers/shop');
+var RegionController = require('./lib/controllers/region');
 var EncounterController = require('./lib/controllers/encounter');
 
 const routes = require("./routes")(io);
 app.use(routes);
 
-io.use(function(socket, next){
- if(socket.handshake.query && socket.handshake.query.token){
-  jwt.verify(socket.handshake.query.token, process.env.SECRET, function(err, decoded){
-   if (err) return
-   next(new Error('Authentication error'));
-   socket.decoded = decoded;
-   next();
-  });
- }else{
-  next(new Error('Authentication error'));
- }
-}).on('connection', function(socket){
+io.on('connection', function(socket){
 	UserController.init(socket);
-	PlayerController.init(socket);
+	PlayerController.init(socket, game);
 	ShopController.init(socket);
+	RegionController.init(socket);
 	EncounterController.init(socket);
 });
 

@@ -84,7 +84,9 @@ var Router = function(io){
     data.Chat = result;
     
     if(User.hasChar){
+     console.log("game route", User);
      PlayerService.get(User.id, (p) => {
+      console.log('game route PS.get res', p);
       var rankStr = PlayerService.getRankString(p.rank)
       data.Player = p;
       data.Player.rankString = rankStr;

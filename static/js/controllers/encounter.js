@@ -1,6 +1,7 @@
 DC.Encounter = {
  creature: [],
  init: (location) => {
+  console.log('encounter init', location);
   DC.Encounter.listeners.init();
   DC.Encounter.events.init();
   
@@ -9,8 +10,9 @@ DC.Encounter = {
  listeners: {
   init: () => {
    Socket.on("encounter-init-result", (data) => {
-    console.log(data);
-    DC.Encounter.creature = '';
+    console.log(JSON.stringify(data));
+    var html = DC.Tpl.build(data);
+    DC.Game.container.html(html);
    });
   }
  },

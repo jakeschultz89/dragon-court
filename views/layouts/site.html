@@ -27,12 +27,14 @@
 	 };
 	</script>
 	<script src="/js/preload.js"></script>
-	<script src="/js/main.js"></script>
+	<script src="/js/tpl.js"></script>
 	<script src='/js/controllers/user.js'></script>
+	<script src="/js/main.js"></script>
+	
 	<script>
 	  DC.init = () => {
-	   DC.User.listeners.init();
-	   DC.User.events.init();
+	   DC.Tpl.init();
+	   DC.User.init();
 	  };
 	  DC.models = {
 	    User: {

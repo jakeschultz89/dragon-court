@@ -59,36 +59,8 @@
 	<script src='/js/controllers/game.js'></script>
  <script>
  DC.init = () => {
- 
-  DC.Game.events.init();
-  DC.Game.listeners.init();
   DC.Game.init();
  };
- 
- class Player{
-  private observers = new Set<Observer>();
-  subscribe(observer: Observer){
-   this.observers.add(observer);
-  }
-  unsubscribe(observer: Observer){
-   this.observers.delete(observer);
-  }
-  notify(data: Object){
-   this.observers.forEach((observer) => {
-    observer.update(data);
-   });
-  }
- }
- 
- const P = new Player();
- const observer = new StatObserver();
- P.subscribe(observer);
- P.notify({test: 'yup'});
-
-
-
-
- 
  DC.models = { 
   User: {
    id: {{User.id}},
@@ -99,15 +71,7 @@
    token: '',
   },
   Player: {
-   observers: new Set(),
-   subscribe: () => {
-    DC.models.Player.observers.add(observer);
-   },
-   notify: () => {
-    DC.models.Player.observers.forEach((observer) => {
-     observer.update(message);
-    });
-   },
+   handlers: [],
    owner: {{Player.owner}},
    rankString: '{{Player.rankString}}',
    nameAndRank: '{{Player.nameRankStr}}',
@@ -182,6 +146,7 @@
 </script>
 </head>
 <body>
+ <div id="loading"></div>
  <div class="container-fluid mt-auto h-100">
   {{{body}}}
  </div>

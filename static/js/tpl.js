@@ -6,17 +6,14 @@ DC.Tpl = {
   var template = Handlebars.compile(data.html);
   return template(data.data);
  },
- buildModal: (id, html) => {
+ buildModal: (id, title, html) => {
   if(id == "error"){
    console.log(html);
   }
-  var $el = $('<div id="'+id+'" class="modal">'+html+'</div>');
   
-  var modalhtml = '<div id="'+id+'" class="modal-body">'+
-      '<p>'+html+'</p>'+
-     '</div>';
+  var modalHtml = '<div class="modal fade" id="'+id+'" tabindex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="'+id+'-title">'+title+'</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div> <div class="modal-body">'+html+'</div> <div class="modal-footer"> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div> </div> </div> </div>';
   
-  $('body').append(modalhtml);
+  $('body').append(modalHtml);
   $('#'+id).modal();
  },
  buildChat: () => {

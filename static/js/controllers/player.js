@@ -43,7 +43,7 @@ DC.Player = {
 	   DC.models.Player.totalGuildSkills = DC.models.Player.skills.fighter.skill + DC.models.Player.skills.magic.skill + DC.models.Player.skills.trade.skill;
 	  });
 	  
-	  Socket.on('tpl-statbar-result', (data) => {
+	  Socket.on('player-statbar-result', (data) => {
 	  var tpl = data.html;
 	  var statEquipment = "";
 	 
@@ -143,7 +143,7 @@ DC.Player = {
 	 });
 	},
 	buildStats: () => {
-	 Socket.emit('tpl-statbar', DC.models.Player.owner);
+	 Socket.emit('player-statbar', DC.models.Player.owner);
  },
  hasEnoughForTransaction: (cost) => {
   if(DC.models.Player.cash - cost >= 0){

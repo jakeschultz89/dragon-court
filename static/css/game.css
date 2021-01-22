@@ -8,27 +8,6 @@ body {
     height:100%;
 }
 
-#overlay {
-	visibility: hidden;
-	position: absolute;
-	top: 20px;
-	bottom: 20px;
-	width:88%;
-	margin-left: 6%;
-	text-align:center;
-	background-color: #000;
-	z-index: 1000;
-	overflow-y: scroll;
-	box-shadow: -1px 2px 15px -1px #000;
-}
-
-#overlay div {
-	margin: auto;
-	background-color: #fff;
-	padding:15px;
-}
-
-
 #progress {
   font-size: 50px;
   left: 50%;
@@ -66,11 +45,15 @@ body {
 	border: 5px solid black;
 }
 
+
+
 #statBar {
  font-size: 0.5em;
  color: #fff;
  border: 1px solid #fff;
 }
+
+
 
 .character-sheet .exp-bar{
 	width:100%;
@@ -78,12 +61,16 @@ body {
 	border:1px solid #0e4399;
 }
 
+
+
 .character-sheet .exp-bar .inner{
 	width:0;
 	height:10px;
 	border-right: 1px solid #000;
 	background: #0e4399;
 }
+
+
 
 .shop-item-container {
 	height: 100%;
@@ -96,6 +83,8 @@ body {
 	-webkit-overflow-scrolling: touch;
 }
 
+
+
 .shop-item {
 	padding: 10px 20px;
 	border-bottom: 1px solid #ccc;
@@ -104,10 +93,14 @@ body {
 		border-bottom: none;
 	}
 
+
+
 	&:nth-child(even) {
 		background: #f8f8f8;
 	}
 }
+
+
 
 .shop-item-selected {
 	background-color: rgba(255,255,255,0.4);
