@@ -14,7 +14,6 @@ DC.Region = {
     e.preventDefault();
     
     var type = $(this).data().id;
-    console.log(type);
     DC.Shop.init(type);
    });
    
@@ -22,7 +21,6 @@ DC.Region = {
     e.preventDefault();
     
     var id = $(this).data().id;
-    console.log(id);
     DC.Region.init(id);
    });
    
@@ -35,9 +33,8 @@ DC.Region = {
   }
  },
  init: (id) => {
-  console.log("region init");
-  DC.models.Player.region = id;
-  DC.Region.data = RegionFactory.get(DC.models.Player.region);
+  DC.Player.region = id;
+  DC.Region.data = RegionFactory.get(DC.Player.region);
   DC.Region.data.build();
   DC.Player.buildStats();
  }

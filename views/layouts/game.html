@@ -57,6 +57,8 @@
 	<script src='/js/controllers/encounter.js'></script>
 	<script src='/js/controllers/region.js'></script>
 	<script src='/js/controllers/game.js'></script>
+	<script src='/js/lib/statObserver.js'></script>
+	<script src='/js/lib/player.js'></script>
  <script>
  DC.init = () => {
   DC.Game.init();
@@ -71,7 +73,6 @@
    token: '',
   },
   Player: {
-   handlers: [],
    owner: {{Player.owner}},
    rankString: '{{Player.rankString}}',
    nameAndRank: '{{Player.nameRankStr}}',
@@ -128,7 +129,7 @@
    totalAttack: 0,
    totalDefend: 0,
    questsToday: 0,
-   totalGuildSkills: 0
+   totalGuildSkills: 0,
   },
   Chat: [
    {{#each Chat}}

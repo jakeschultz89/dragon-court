@@ -1,6 +1,7 @@
 DC.Player = {
  init: () => {
   DC.Player.listeners.init();
+  DC.models.Player.observers.push(new StatObserver());
   Socket.emit('player-get', DC.models.Player.owner);
  },
  listeners: {

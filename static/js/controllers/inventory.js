@@ -82,11 +82,11 @@ DC.Inventory = {
     item.qty = item.qty + (qty != null) ? qty : 1;
    }else{
     DC.Inventory.items.push(obj);
-    DC.models.Player.storage = DC.models.Player.storage + 1;
+    DC.Player.storage = DC.Player.storage + 1;
    }
   }else{
    DC.Inventory.items.push(obj);
-   DC.models.Player.storage = DC.models.Player.storage + 1;
+   DC.Player.storage = DC.Player.storage + 1;
   }
  },
  drop: () => {
@@ -100,7 +100,7 @@ DC.Inventory = {
     return obj != selectedItem;
    });
    DC.Inventory.items = newItems;
-   DC.models.Player.storage = DC.models.Player.storage - 1;
+   DC.Player.storage = DC.Player.storage - 1;
   }else{
    // show error modal
   }

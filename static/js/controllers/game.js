@@ -16,11 +16,12 @@ DC.Game = {
   }
  },
  init: ()=> {
-  console.log('Game init');
   DC.Game.events.init();
   DC.Game.listeners.init();
+  
+  DC.Player = new Player(DC.models.Player);
+  DC.Player.subscribe(new StatObserver);
 
-  DC.Player.init();
   DC.Inventory.init();
   DC.Region.listeners.init();
   DC.Region.events.init();
@@ -28,11 +29,7 @@ DC.Game = {
   //DC.Chat.init();
   
   DC.Game.container = $('#gameDiv');
-  gameStart(() => {
-		  setVisible('#gameDiv', true);
-		  setVisible('#loading', false);
-		  DC.Game.start();
-		 });
+  DC.Game.start();
 	},
 	start: () => {
 	 if(!DC.models.User.hasChar){
@@ -45,22 +42,22 @@ DC.Game = {
 	 setTimeout(function(){
 	  var awakenText;
 	  
-	  if(DC.models.Player.quests){
+	  if(DC.Player.quests){
 	   if(DC.models.User.firstRun){
 	    awakenText = "You arrive in Town one sunny morning, ready to begin your adventure.";
 	   }else{
 	    awakenText = DC.Region.data.awakenText();
 	    var getStipend = false;
 	    
-	    if(DC.models.Player.rankString != 'Peasant'){
+	    if(DC.Player.rankString != 'Peasant'){
 	     getStipend = true;
 	    }
 	    
 	    if(getStipend){
 	     var base = 2048;
-	     var gain = Math.floor((base * DC.models.Player.rank) * (DC.models.Player.level / 2));
-	     DC.models.Player.cashToday = DC.models.Player.cashToday + gain;
-	     DC.models.Player.cash = DC.models.Player.cash + gain;
+	     var gain = Math.floor((base * DC.Player.rank) * (DC.Player.level / 2));
+	     DC.Player.cashToday = DC.Player.cashToday + gain;
+	     DC.Player.cash = DC.Player.cash + gain;
 	     
 	     awakenText += "<br /><br />You receive "+gain+" marks as stipend from your family's lands.";
 	    }
@@ -93,7 +90,7 @@ DC.Game = {
 	 }, 1500);
 	},
 	play: () => {
-	console.log("play"); DC.Region.init(DC.models.Player.region);
+	  DC.Region.init(DC.Player.region);
 	 DC.Player.buildStats();
 	}
 };
