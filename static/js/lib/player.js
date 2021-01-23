@@ -151,6 +151,8 @@ class Player {
 	   this.rankString = d.rankString;
 	   this.nameAndRank = d.nameRankString;
 	   this.totalGuildSkills = this.skills.fighter.skill + this.skills.magic.skill + this.skills.trade.skill;
+	   
+	   this.notify(this);
 	  });
 	  
 	  Socket.on('player-statbar-result', (data) => {
@@ -226,6 +228,56 @@ class Player {
   }else{
    return true;
   }
+ }
+ 
+ getRankString(rank){
+  var title;
+  switch(rank){
+   default:
+   case 0:
+    title = "Peasant";
+    break;
+   case 1:
+    title = "Squire";
+    break;
+   case 2:
+    title = "Knight";
+    break;
+   case 3:
+    title = "Captain";
+    break;
+   case 4:
+    title = "Baron";
+    break;
+   case 5:
+    title = "Count";
+    break;
+   case 6:
+    title = "Viscount";
+    break;
+   case 7:
+    title = "Marquis";
+    break;
+   case 8:
+    title = "Earl";
+    break;
+   case 9:
+    title = "Duke";
+    break;
+   case 10:
+    title = "Prince";
+    break;
+   case 11:
+    title = "Viceroy";
+    break;
+   case 12:
+    title = "Regent";
+    break;
+   case 13:
+    title = "Seneschal";
+    break;
+  }
+  return title;
  }
 }
 
