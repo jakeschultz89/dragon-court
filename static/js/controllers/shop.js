@@ -52,7 +52,7 @@ DC.Shop =  {
  listeners: {
   init: () => {
    Socket.on('shop-buy-result', (data) => {
-				DC.Tpl.buildModal("info", "<strong>You have successfully purchased 1 "+data+".</strong>");
+				DC.Tpl.buildModal("info", "Success!", "<strong>You have successfully purchased 1 "+data+".</strong>");
 				
 			});
    
@@ -128,11 +128,11 @@ DC.Shop =  {
      var item = DC.Inventory.getItem(DC.Shop.selectedItem);
      Socket.emit('shop-polish', {id: DC.models.Player.owner, itm: item});
 				}else{
-					DC.Tpl.buildModal("error", "<strong>You still have enough Marks to purchase.</strong>");
+					DC.Tpl.buildModal("error", "Oops!", "<strong>You still have enough Marks to purchase.</strong>");
 				}
 			}
 		}else{
-			DC.Tpl.buildModal("error", "<strong>You must select an item first.</strong>");
+			DC.Tpl.buildModal("error", "Oops!", "<strong>You must select an item first.</strong>");
 		}
 	},
 	identify: () => {
@@ -144,11 +144,11 @@ DC.Shop =  {
 					var item = DC.Inventory.getItem(DC.Shop.selectedItem);
 					Socket.emit('shop-identify', {id: DC.models.Player.owner, itm: item});
 				}else{
-					DC.Tpl.buildModal("error", "<strong>You still have enough Marks to purchase.</strong>");
+					DC.Tpl.buildModal("error", 'Oops",  "<strong>You still have enough Marks to purchase.</strong>");
 				}
 			}
 		}else{
-			DC.Tpl.buildModal("error", "<strong>You must select an item first.</strong>");
+			DC.Tpl.buildModal("error", "Oops",  "<strong>You must select an item first.</strong>");
 		}
 	},
 	transaction: () => {
@@ -160,14 +160,14 @@ DC.Shop =  {
 				DC.Shop.sell();
 			}
 		}else{
-			DC.Tpl.buildModal("error", "<strong>You must select an item first.</strong>");
+			DC.Tpl.buildModal("error", "Oops!", "<strong>You must select an item first.</strong>");
 		}
 	},
 	info: () => {
 		if(DC.Shop.selectedItem){
 			
 		}else{
-			DC.Tpl.buildModal("error", "<strong>You select an item first.</strong>");
+			DC.Tpl.buildModal("error", "Oops!", "<strong>You select an item first.</strong>");
 		}
 	},
 	buy: () => {
@@ -176,7 +176,7 @@ DC.Shop =  {
 		if(DC.Player.hasEnoughForTransaction(item.cost)){
 			Socket.emit('shop-buy', {id: DC.models.Player.owner, itm: item});
 		}else{
-			DC.Tpl.buildModal("error", "<strong>You do not have enough Marks to purchase.</strong>");
+			DC.Tpl.buildModal("error", "Oops!", "<strong>You do not have enough Marks to purchase.</strong>");
 		}
 	},
 	sell: () => {

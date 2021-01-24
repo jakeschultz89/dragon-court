@@ -76,7 +76,7 @@ DC.Creation = {
      cause = DC.Creation.freePoints - cost;
      
      if(query){
-      DC.Tpl.buildModal("error", "<strong>"+error+"</strong>");
+      DC.Tpl.buildModal("error", "Oops!", "<strong>"+error+"</strong>");
      }else{
       DC.Creation.charClass = type;
       DC.Creation.pointChange(cause);
@@ -87,7 +87,7 @@ DC.Creation = {
 	   e.preventDefault();
 	   
 	   if(parseInt($('#freePts').text()) > 0){
-	    DC.Tpl.buildModal("error", "<strong>You still have free points to distribute.</strong>");
+	    DC.Tpl.buildModal("error", "Oops!", "<strong>You still have free points to distribute.</strong>");
 	    return;
 	   }
 	   
@@ -147,7 +147,7 @@ DC.Creation = {
 	 }
 	 
 	 if(query){
-	  DC.Tpl.buildModal("error", "<strong>"+error+"</strong>", {});
+	  DC.Tpl.buildModal("error", "Oops!", "<strong>"+error+"</strong>", {});
 	 }else{
 	  $('#'+type+'Stat').text(effect);
 	  DC.Creation.pointChange(cause);
