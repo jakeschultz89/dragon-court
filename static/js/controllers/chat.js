@@ -13,8 +13,10 @@ DC.Chat = {
   init: () => {
    Socket.on("chat-broadcast", (data) => {
 	   console.log(data);
-	   var chatDiv = $('<div class="chatDiv" data-type="'+data.channel+'"><div class="row"><div class="col-12">'+data.time+'</div></div><div class="row"><div class="col-4">'+data.senderName+'</div><div class="col-8">'+data.message+'</div></div></div>');
-   DC.Chat.container.append(chatDiv);
+	  });
+	  
+	  Socket.on("chat-pop", (data) => {
+	   console.log(data);
 	  });
 	 }
  },
@@ -28,6 +30,12 @@ DC.Chat = {
     if(text != ''){
      Socket.emit('chat-message', text);
     }
+   });
+   
+   $(document).on('click', '.chatDiv', function(e){
+    e.preventDefault();
+    
+    Socket.emit('chat-open');
    });
   }
  }

@@ -28,7 +28,21 @@ process.on('uncaughtException', (err) => {
 
 const app = express();
 const server = require('http').Server(app);
+var session = require("express-session")({
+    secret: "my-secret",
+    resave: true,
+    saveUninitialized: true
+});
+
+var sharedsession = require("express-socket.io-session");
+app.use(session);
+io.use(sharedsession(session, {
+    autoSave:true
+}));
+
+
 const io = require('socket.io')(server);
+io.use(sharedsession(session));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -93,6 +107,7 @@ io.on('connection', function(socket){
 	ShopController.init(socket);
 	RegionController.init(socket);
 	EncounterController.init(socket);
+	ChatController.init(socket);
 });
 
 server.listen(process.env.PORT, function () {

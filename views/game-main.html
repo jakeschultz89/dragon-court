@@ -1,14 +1,91 @@
 <!-- Game Area -->
-<div class="row h-100 align-items-center justify-content-between">
-	<div class="col-lg-8 col-sm-12 col-md-12">
-		<div id="gameDiv" style="height:40em;">
-		
-		</div>
-		<div id="statBar" style="height:100%;background-color:#333;">
-		
-		</div>
-	</div>
-	<div class="col-lg-4 d-none d-lg-block">
-		{{> chat }}
-	</div>
+<div class="row">
+ <div class="col">
+  <div class="d-block d-sm-none">
+     <!-- chat area -->
+     <div class="chatDiv">
+	     <div id="chatSmallHistory">
+	      <ul>
+	       <div class="row">
+	        <div class="col-3 chatSmallAuthor">
+	         chaoskreator
+	        </div>
+	        <div class="col-9 chatSmallMessage">
+	         chaoskreator was here
+	        </div>
+	       </div>
+	      </ul>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-12">
+     <!-- game area -->
+     <div id="gameDiv" style="height:40em;"></div>
+     <div id="statBar" style="background-color:#333;"></div>
+    </div>
+   </div>
+  </div>
+  <div class="d-none d-sm-block d-md-none">
+   <div class="row">
+    <div class="col-12">
+     <!-- chat area -->
+     <div class="chatDiv">
+	     <div id="chatHistory"><ul></ul></div>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-12">
+     <!-- game area -->
+     <div id="gameDiv" style="height:40em;"></div>
+     <div id="statBar" style="background-color:#333;"></div>
+    </div>
+   </div>
+  </div>
+  <div class="d-none d-md-block d-lg-none">
+   <div class="row">
+    <div class="col-8">
+     <!-- game area -->
+     <div id="gameDiv" style="height:40em;"></div>
+     <div id="statBar" style="background-color:#333;"></div>
+    </div>
+    <div class="col-4">
+     <!-- chat area -->
+     <div class="chatDiv">
+	     <div id="chatHistory"><ul></ul></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="d-none d-lg-block d-xl-none">
+   <div class="row">
+    <div class="col-8">
+     <!-- game area -->
+     <div id="gameDiv" style="height:40em;"></div>
+     <div id="statBar" style="background-color:#333;"></div>
+    </div>
+    <div class="col-4">
+     <!-- chat area -->
+     <div class="chatDiv">
+	     <div id="chatHistory"><ul></ul></div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="d-none d-xl-block">
+   <div class="row">
+    <div class="col-8">
+     <!-- game area -->
+     <div id="gameDiv" style="height:40em;"></div>
+     <div id="statBar" style="background-color:#333;"></div>
+    </div>
+    <div class="col-4">
+     <!-- chat area -->
+     <div class="chatDiv">
+	     <div id="chatHistory"><ul></ul></div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
 </div>
