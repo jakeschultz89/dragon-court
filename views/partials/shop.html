@@ -81,7 +81,7 @@
 			{{#if items}}
 			<ul class="shop-item-container" style="overflow:scroll-y;height:85%;">
 			{{#each items}}
-				<li data-id="{{id}}" class="shop-item">{{name}} {{#iff attack ">" 0}} + {{attack}}a{{/iff}}{{#iff attack "<" 0}}{{attack}}a{{/iff}}{{#iff defend ">" 0}}+{{defend}}d{{/iff}}{{#iff defend "<" 0}}{{defend}}d{{/iff}} - ${{cost}}</li>
+				<li data-id="{{id}}" class="shop-item">{{name}} +{{attack}}a +{{defend}}d - ${{cost}}</li>
 			{{/each}}
 			</ul>
 			{{/if}}

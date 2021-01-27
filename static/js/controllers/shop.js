@@ -10,7 +10,9 @@ DC.Shop =  {
     e.preventDefault();
     
     DC.Shop.selectedItem = $(this).data().id;
-    $(this).style('background-color', rgba(0,0,0,0.2));
+    console.log(DC.Shop.selectedItem);
+    $(this).css('background-color', '#ccc');
+    $(this).siblings().css('background-color', 'transparent');
    });
    
    $(document).on('click', '#shopTrade', function(e){
@@ -142,9 +144,9 @@ DC.Shop =  {
 			}else{
 				if(DC.Player.hasEnoughForTransaction(40)){
 					var item = DC.Inventory.getItem(DC.Shop.selectedItem);
-					Socket.emit('shop-identify', {id: DC.models.Player.owner, itm: item});
+					Socket.emit('shop-identify', item);
 				}else{
-					DC.Tpl.buildModal("error", 'Oops",  "<strong>You still have enough Marks to purchase.</strong>");
+					DC.Tpl.buildModal("error", "Oops",  "<strong>You still have enough Marks to purchase.</strong>");
 				}
 			}
 		}else{
@@ -174,7 +176,7 @@ DC.Shop =  {
 		var item = DC.Shop.getItem(DC.Shop.selectedItem);
 		item.qty = 1;
 		if(DC.Player.hasEnoughForTransaction(item.cost)){
-			Socket.emit('shop-buy', {id: DC.models.Player.owner, itm: item});
+			Socket.emit('shop-buy', item);
 		}else{
 			DC.Tpl.buildModal("error", "Oops!", "<strong>You do not have enough Marks to purchase.</strong>");
 		}

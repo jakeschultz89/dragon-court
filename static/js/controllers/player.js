@@ -77,7 +77,7 @@ DC.Player = {
 	  };
 	 
 	  var html = DC.Tpl.build(statObj);
-	  $('#statBar').html(html);
+	  $('.statBar').html(html);
 	 });
   }
  },

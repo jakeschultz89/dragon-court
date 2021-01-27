@@ -78,15 +78,8 @@ var Router = function(io){
     skilled: 0
    };
    
-   data.Chat = {};
-   
-   ChatService.bulk(User.chat, (result) => {
-    data.Chat = result;
-    
-    if(User.hasChar){
-     console.log("game route", User);
+   if(User.hasChar){
      PlayerService.get(User.id, (p) => {
-      console.log('game route PS.get res', p);
       var rankStr = PlayerService.getRankString(p.rank)
       data.Player = p;
       data.Player.rankString = rankStr;
@@ -97,7 +90,6 @@ var Router = function(io){
     }else{
      res.render('game-main', data);
     }
-   });
   }
  });
  

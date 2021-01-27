@@ -21,14 +21,16 @@ DC.Game = {
   
   DC.Player = new Player(DC.models.Player);
   DC.Player.subscribe(new StatObserver);
+  DC.Player.attachListeners();
 
   DC.Inventory.init();
   DC.Region.listeners.init();
   DC.Region.events.init();
   DC.Shop.listeners.init();
-  //DC.Chat.init();
+  DC.Shop.events.init();
+  DC.Chat.init();
   
-  DC.Game.container = $('#gameDiv');
+  DC.Game.container = $('.gameDiv');
   DC.Game.start();
 	},
 	start: () => {

@@ -56,7 +56,9 @@
 	<script src='/js/controllers/encounter.js'></script>
 	<script src='/js/controllers/region.js'></script>
 	<script src='/js/controllers/game.js'></script>
+	<script src='/js/controllers/chat.js'></script>
 	<script src='/js/lib/statObserver.js'></script>
+	<script src='/js/lib/creatureObserver.js'></script>
 	<script src='/js/lib/player.js'></script>
  <script>
  DC.init = () => {
@@ -68,13 +70,13 @@
    name: '{{User.name}}',
    firstRun: {{User.firstRun}},
    hasChar: {{User.hasChar}},
-   chat: {{User.chat}},
+   chat: "{{User.chat}}",
    token: '',
   },
   Player: {
    owner: {{Player.owner}},
    rankString: '{{Player.rankString}}',
-   nameAndRank: '{{Player.nameRankStr}}',
+   nameAndRank: '{{Player.nameRankString}}',
    region: '{{Player.region}}',
    charclass: '{{Player.charClass}}',
    background: '{{Player.background}}',

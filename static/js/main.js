@@ -7,8 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
  
  fbInit(document, 'script', 'facebook-jssdk');
  DC.init();
- $(document).on('touchstart', '#chatDiv', handleTouchStart);
- $(document).on('touchmove', '#chatDiv', handleTouchMove);
+ $(document).on('touchstart', '.chatDiv', handleTouchStart);
+ $(document).on('touchmove', '.chatDiv', handleTouchMove);
 }, false);
 
 $(function(){

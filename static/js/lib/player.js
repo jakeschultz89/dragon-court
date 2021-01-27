@@ -61,6 +61,7 @@ class Player {
  constructor(data){
   this.owner = data.owner;
   this.rankString = data.rankString;
+  this.nameAndRank = data.nameAndRank;
   this.region = data.region;
   this.charclass = data.charClass;
   this.background = data.background;
@@ -156,6 +157,7 @@ class Player {
 	  });
 	  
 	  Socket.on('player-statbar-result', (data) => {
+		console.log(data);
 	  var tpl = data.html;
 	  var statEquipment = "";
 	 
@@ -188,7 +190,7 @@ class Player {
 	  };
 	 
 	  var html = DC.Tpl.build(statObj);
-	  $('#statBar').html(html);
+	  $('.statBar').html(html);
 	 });
  }
  
@@ -198,6 +200,11 @@ class Player {
  
  removeEffect(effect){
  
+ }
+ 
+ buildStats(){
+	console.log('build stats');
+	Socket.emit('player-statbar', DC.models.Player.owner);
  }
  
  calculate(){
@@ -217,10 +224,6 @@ class Player {
 	 }
 	 this.totalSkill = skillStat;
 	}
-	
-	buildStats(){
-	 Socket.emit('player-statbar', this.owner);
- }
  
  hasEnoughForTransaction(cost){
   if(this.cash - cost >= 0){

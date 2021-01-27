@@ -3,9 +3,9 @@ html{
 }
 
 body {
-    margin: 0 auto;
-    background-color: #67945f;
-    height:100%;
+	margin: 0 auto;
+	background-color: #67945f;
+	height:100%;
 }
 
 #progress {
@@ -42,57 +42,58 @@ body {
 
 /* Extra small devices (phones, less than 768px) */
 .chatDiv{
- border: 1px solid black;
- background: #fff;
- height: 80px;
- color: #000;
- font-size: 0.575em;
+	border: 1px solid black;
+	background: #fff;
+	height: 8em;
+	color: #000;
+	font-size: 0.575em;
 }
 
-#gameDiv {
- margin-top: 5px;
+.chatEntry{
+	border-bottom: 1px solid #000;
+}
+
+.chatDate{
+	font-size: 0.7em;
+}
+
+.gameDiv {
+	margin-top: 5px;
 	background: #fff;
 	border: 5px solid black;
+	height: 40em;
 }
 
-#statBar {
- font-size: 0.5em;
- color: #fff;
- border: 1px solid #fff;
+.statBar {
+	font-size: 0.5em;
+	color: #fff;
+	border: 1px solid #fff;
+	background-color:#333;
 }
 
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
- .chatDiv{
-  border: 1px solid black;
-  background: #fff;
-  height: 80px;
-  color: #000;
-  font-size: 0.575em;
- }
- 
- #gameDiv {
-  margin-top: 5px;
-	 background: #fff;
-	 border: 5px solid black;
- }
+	.chatDiv{
+		border: 1px solid black;
+		background: #fff;
+		height: 40em;
+		color: #000;
+		font-size: 1em;
+		margin-top: 5px;
+	}
+	
+	.chatMsgInput{
+		position: absolute;
+		bottom: 5px;
+	}
 
- #statBar {
-  font-size: 0.5em;
-  color: #fff;
-  border: 1px solid #fff;
- }
+	.statBar {
+		font-size: 1em;
+		color: #fff;
+		border: 1px solid #fff;
+		background-color:#333;
+	}
 }
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) { }
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { }
-
-
-
-
 
 .character-sheet .exp-bar{
 	width:100%;

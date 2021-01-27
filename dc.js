@@ -28,8 +28,10 @@ process.on('uncaughtException', (err) => {
 
 const app = express();
 const server = require('http').Server(app);
+const io = require('socket.io')(server);
+
 var session = require("express-session")({
-    secret: "my-secret",
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true
 });
@@ -39,10 +41,6 @@ app.use(session);
 io.use(sharedsession(session, {
     autoSave:true
 }));
-
-
-const io = require('socket.io')(server);
-io.use(sharedsession(session));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -91,19 +89,20 @@ handlebars = hb.create({
 });
 app.engine('html', handlebars.engine); app.set('view engine', 'html');
 
-var game = require('./lib/game');
-var UserController = require('./lib/controllers/user');
-var PlayerController = require('./lib/controllers/player');
-var ShopController = require('./lib/controllers/shop');
-var RegionController = require('./lib/controllers/region');
-var EncounterController = require('./lib/controllers/encounter');
+global.game = require('./lib/game');
+global.UserController = require('./lib/controllers/user');
+global.PlayerController = require('./lib/controllers/player');
+global.ShopController = require('./lib/controllers/shop');
+global.RegionController = require('./lib/controllers/region');
+global.EncounterController = require('./lib/controllers/encounter');
+global.ChatController = require('./lib/controllers/chat');
 
 const routes = require("./routes")(io);
 app.use(routes);
 
 io.on('connection', function(socket){
 	UserController.init(socket);
-	PlayerController.init(socket, game);
+	PlayerController.init(socket);
 	ShopController.init(socket);
 	RegionController.init(socket);
 	EncounterController.init(socket);
