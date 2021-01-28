@@ -115,7 +115,19 @@ class Player {
   });
  }
  
+ attachEvents(){
+  $(document).on('click', '.statBarButton', function(e){
+   e.preventDefault();
+   
+   Socket.emit("player-character");
+  });
+ }
+ 
  attachListeners(){
+  Socket.on("player-character-result", (data) => {
+   DC.Tpl.display(data);
+  });
+  
   Socket.on('player-seed', (d) => {
 	   this.owner = d.owner;
 	   this.region = d.region;
@@ -157,7 +169,6 @@ class Player {
 	  });
 	  
 	  Socket.on('player-statbar-result', (data) => {
-		console.log(data);
 	  var tpl = data.html;
 	  var statEquipment = "";
 	 
@@ -203,7 +214,6 @@ class Player {
  }
  
  buildStats(){
-	console.log('build stats');
 	Socket.emit('player-statbar', DC.models.Player.owner);
  }
  

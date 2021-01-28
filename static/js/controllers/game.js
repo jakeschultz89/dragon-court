@@ -22,7 +22,8 @@ DC.Game = {
   DC.Player = new Player(DC.models.Player);
   DC.Player.subscribe(new StatObserver);
   DC.Player.attachListeners();
-
+  DC.Player.attachEvents();
+  
   DC.Inventory.init();
   DC.Region.listeners.init();
   DC.Region.events.init();
@@ -41,7 +42,6 @@ DC.Game = {
 	 }
 	},
 	statScreen: () => {
-	 setTimeout(function(){
 	  var awakenText;
 	  
 	  if(DC.Player.quests){
@@ -89,7 +89,6 @@ DC.Game = {
 	  }else{
 	   // display game over / exit
 	  }
-	 }, 1500);
 	},
 	play: () => {
 	  DC.Region.init(DC.Player.region);

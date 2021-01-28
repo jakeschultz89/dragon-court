@@ -85,6 +85,8 @@ var Router = function(io){
       data.Player.rankString = rankStr;
       data.Player.nameRankString = rankStr+' '+User.name;
       
+      global.Player = data.Player;
+      
       res.render('game-main', data);
      });
     }else{

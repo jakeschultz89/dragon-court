@@ -6,6 +6,10 @@ DC.Tpl = {
   var template = Handlebars.compile(data.html);
   return template(data.data);
  },
+ display: (data) => {
+  var template = Handlebars.compile(data.html);
+  DC.Game.container.html(template(data.data));
+ },
  buildModal: (id, title, html) => {
   if(id == "error"){
    console.log(html);
@@ -29,25 +33,65 @@ DC.Tpl = {
  }
 };
 
-Handlebars.registerHelper('iff', (a, operator, b, opts) => {
- var bool = false;
- switch(operator) {
+Handlebars.registerHelper('compare', (a, operator, b, options) => {
+ var result;
+ switch(operator){
   case '==':
-   bool = a == b;
+   result = a == b;
    break;
-  case '>':
-   bool = a > b;
+  case '===':
+   result = a === b;
+   break;
+  case '!=':
+   result = a != b;
+   break;
+  case '!==':
+   result = a !== b;
    break;
   case '<':
-   bool = a < b;
+   result = a < b;
    break;
-  default:
-   throw "Unknown operator " + operator;
+  case '>':
+   result = a > b;
+   break;
+  case '<=':
+   result = a <= b;
+   break;
+  case '>=':
+   result = a >= b;
+   break;
+  case 'typeof':
+   result = typeof a === b;
+   break;
+  default: {
+   throw new Error('helper {{compare}}: invalid operator: `' + operator + '`');
+  }
  }
- 
- if (bool) {
-  return opts.fn(this);
- } else {
-		return opts.inverse(this);
-	}
+ return utils.value(result, this, options);
 });
+
+var utils = {};
+utils.value = function(val, context, options){
+ if(utils.isOptions(val)){
+  return utils.value(null, val, options);
+ }
+ if(utils.isOptions(context)){
+  return utils.value(val, {}, context);
+ }
+ if(utils.isBlock(options)){
+  return !!val ? options.fn(context) : options.inverse(context);
+ }
+ return val;
+};
+
+utils.isOptions = function(val){
+ return utils.isObject(val) && utils.isObject(val.hash);
+};
+
+utils.isObject = function(val){
+ return typeof val === 'object';
+};
+
+utils.isBlock = function(options){
+ return utils.isOptions(options) && typeof options.fn === 'function' && typeof options.inverse === 'function';
+};

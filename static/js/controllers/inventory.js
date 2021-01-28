@@ -7,11 +7,11 @@ DC.Inventory = {
  init: () => {
   DC.Inventory.listeners.init();
   
-  Socket.emit('inv-get', DC.models.User.id);
+  Socket.emit('inventory-get', DC.Player.owner);
  },
  listeners: {
   init: () => {
-   Socket.on("inv-get-incoming", (data) => {
+   Socket.on("inventory-seed", (data) => {
     DC.Inventory.equipment = new Equipment();
     for(var i = 0; i < data.length; i++){
      var itmJson = data[i];
@@ -51,7 +51,6 @@ DC.Inventory = {
       DC.Inventory.items.push(item);
      }
     }
-    console.log(DC.Inventory);
    });
   }
  },

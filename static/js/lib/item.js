@@ -1,289 +1,289 @@
 class Item {
-	_id = 0;
-	_name = 0;
-	_region = '';
-	_shop = '';
-	_guts = 0;
-	_wits = 0;
-	_charm = 0;
-	_attack = 0;
-	_defend = 0;
-	_skill = 0;
-	_cost = 0;
-	_func = '';
-	_equippable = 0;
-	_qty = 0;
-	_equipped = 0;
-	_identified = 0;
-	_abilities = '';
-	_maxEnchants = 0;
-	_timesEnchanted = 0;
-	_inStorage = 0;
-	_dropRate = 0;
-	_lvl = 0;
-	_isSilver = 0;
-	_isCrystal = 0;
+	id = 0;
+	name = 0;
+	region = '';
+	shop = '';
+	guts = 0;
+	wits = 0;
+	charm = 0;
+	attack = 0;
+	defend = 0;
+	skill = 0;
+	cost = 0;
+	func = '';
+	equippable = 0;
+	qty = 0;
+	equipped = 0;
+	identified = 0;
+	abilities = '';
+	maxEnchants = 0;
+	timesEnchanted = 0;
+	inStorage = 0;
+	dropRate = 0;
+	lvl = 0;
+	isSilver = 0;
+	isCrystal = 0;
 	
 	constructor(id, name, region, shop, guts, wits, charm, attack, defend, skill, cost, func, equippable, qty, equipped, identified, abilities, maxEnchants, timesEnchanted, inStorage, dropRate, lvl, isSilver, isCrystal){
-		this._id = id;
-		this._name = name;
-		this._region = region;
-		this._shop = shop;
-		this._guts = guts;
-		this._wits = wits;
-		this._charm = charm;
-		this._attack = attack;
-		this._defend = defend;
-		this._skill = skill;
-		this._cost = cost;
-		this._func = func;
-		this._equippable = equippable;
-		this._qty = qty;
-		this._equipped = equipped;
-		this._identified = identified;
-		this._abilities = abilities;
-		this._maxEnchants = maxEnchants;
-		this._timesEnchanted = timesEnchanted;
-		this._inStorage = inStorage;
-		this._dropRate = dropRate;
-		this._lvl = lvl;
-		this._isSilver = isSilver;
-		this._isCrystal = isCrystal;
+		this.id = id;
+		this.name = name;
+		this.region = region;
+		this.shop = shop;
+		this.guts = guts;
+		this.wits = wits;
+		this.charm = charm;
+		this.attack = attack;
+		this.defend = defend;
+		this.skill = skill;
+		this.cost = cost;
+		this.func = func;
+		this.equippable = equippable;
+		this.qty = qty;
+		this.equipped = equipped;
+		this.identified = identified;
+		this.abilities = abilities;
+		this.maxEnchants = maxEnchants;
+		this.timesEnchanted = timesEnchanted;
+		this.inStorage = inStorage;
+		this.dropRate = dropRate;
+		this.lvl = lvl;
+		this.isSilver = isSilver;
+		this.isCrystal = isCrystal;
 	}
 	
 	get id(){
-		return this._id;
+		return this.id;
 	}
 	
 	set id(id){
-		this._id = id;
+		this.id = id;
 	}
 	
 	get name(){
-		return this._name;
+		return this.name;
 	}
 	
 	set name(name){
-		this._name = name;
+		this.name = name;
 	}
 	
 	get region(){
-		return this._region;
+		return this.region;
 	}
 	
 	set region(region){
-		this._region = region;
+		this.region = region;
 	}
 	
 	get shop(){
-		return this._shop;
+		return this.shop;
 	}
 	
 	set shop(shop){
-		this._shop = shop;
+		this.shop = shop;
 	}
 	
 	get guts(){
-		return this._guts;
+		return this.guts;
 	}
 	
 	set guts(guts){
-		this._guts = guts;
+		this.guts = guts;
 	}
 	
 	get wits(){
-		return this._wits;
+		return this.wits;
 	}
 	
 	set wits(wits){
-		this._wits = wits;
+		this.wits = wits;
 	}
 	
 	get charm(){
-		return this._charm;
+		return this.charm;
 	}
 	
 	set charm(charm){
-		this._charm = charm;
+		this.charm = charm;
 	}
 	
 	get attack(){
-		return this._attack;
+		return this.attack;
 	}
 	
 	set attack(attack){
-		this._attack = attack;
+		this.attack = attack;
 	}
 	
 	get defend(){
-		return this._defend;
+		return this.defend;
 	}
 	
 	set defend(defend){
-		this._defend = defend;
+		this.defend = defend;
 	}
 	
 	get skill(){
-		return this._skill;
+		return this.skill;
 	}
 	
 	set skill(skill){
-		this._skill = skill;
+		this.skill = skill;
 	}
 	
 	get cost(){
-		return this._cost;
+		return this.cost;
 	}
 	
 	set cost(cost){
-		this._cost = cost;
+		this.cost = cost;
 	}
 	
 	get func(){
-		return this._func;
+		return this.func;
 	}
 	
 	set func(func){
-		this._func = func;
+		this.func = func;
 	}
 	
 	get equippable(){
-		return this._equippable;
+		return this.equippable;
 	}
 	
 	set equippable(equippable){
-		this._equippable = equippable;
+		this.equippable = equippable;
 	}
 	
 	get qty(){
-		return this._qty;
+		return this.qty;
 	}
 	
 	set qty(qty){
-		this._qty = qty;
+		this.qty = qty;
 	}
 	
 	get equipped(){
-		return this._equipped;
+		return this.equipped;
 	}
 	
 	set equipped(equipped){
-		this._equipped = equipped;
+		this.equipped = equipped;
 	}
 	
 	get identified(){
-		return this._identified;
+		return this.identified;
 	}
 	
 	set identified(identified){
-		this._identified = identified;
+		this.identified = identified;
 	}
 	
 	get abilities(){
-		return this._abilities;
+		return this.abilities;
 	}
 	
 	set abilities(abilities){
-		this._abilities = abilities;
+		this.abilities = abilities;
 	}
 	
 	get maxEnchants(){
-		return this._maxEnchants;
+		return this.maxEnchants;
 	}
 	
 	set maxEnchants(maxEnchants){
-		this._maxEnchants = maxEnchants;
+		this.maxEnchants = maxEnchants;
 	}
 	
 	get timesEnchanted(){
-		return this._timesEnchanted;
+		return this.timesEnchanted;
 	}
 	
 	set timesEnchanted(timesEnchanted){
-		this._timesEnchanted = timesEnchanted;
+		this.timesEnchanted = timesEnchanted;
 	}
 	
 	get inStorage(){
-		return this._inStorage;
+		return this.inStorage;
 	}
 	
 	set inStorage(inStorage){
-		this._inStorage = inStorage;
+		this.inStorage = inStorage;
 	}
 	
 	get dropRate(){
-		return this._dropRate;
+		return this.dropRate;
 	}
 	
 	set dropRate(dropRate){
-		this._dropRate = dropRate;
+		this.dropRate = dropRate;
 	}
 	
 	get lvl(){
-		return this._lvl;
+		return this.lvl;
 	}
 	
 	set lvl(lvl){
-		this._lvl = lvl;
+		this.lvl = lvl;
 	}
 	
 	get isSilver(){
-		return this._isSilver;
+		return this.isSilver;
 	}
 	
 	set isSilver(isSilver){
-		this._isSilver = isSilver;
+		this.isSilver = isSilver;
 	}
 	
 	get isCrystal(){
-		return this._isCrystal;
+		return this.isCrystal;
 	}
 	
 	set isCrystal(isCrystal){
-		this._isCrystal = isCrystal;
+		this.isCrystal = isCrystal;
 	}
 	
 	addAbility(ability){
-		return this._abilities += ","+ability;
+		return this.abilities += ","+ability;
     }
     
     hasAbility(ability){
-		return this._abilities.includes(ability);
+		return this.abilities.includes(ability);
     }
     
     removeAbility(ability){
-		if(this._abilities.includes(ability)){
-			this._abilities.replace(ability, '');
-			if(this._abilities.startsWith(",")){
-				this._abilities.replace(",", "");
+		if(this.abilities.includes(ability)){
+			this.abilities.replace(ability, '');
+			if(this.abilities.startsWith(",")){
+				this.abilities.replace(",", "");
 			}
 		}
-		return this._abilities;
+		return this.abilities;
     }
     
     getDescription(forName = false){
 		var itemDescription = '',
-			funcParts = this._func.split(":");
+			funcParts = this.func.split(":");
 		if(funcParts[0] == "Weapon" || funcParts[0] == "Armor"){
 			if(this.hasAbility("Rust")){
 				itemDescription += "@";
 			}
-			itemDescription += this._name;
-			if(this._identified){
-				itemDescription += "["+this._attack+"a, "+this._defend+"d]";
+			itemDescription += this.name;
+			if(this.identified){
+				itemDescription += "["+this.attack+"a, "+this.defend+"d]";
 			}
 		}else{
 			if(forName){
-                itemDescription = this._name;
+                itemDescription = this.name;
             }else{
-                itemDescription = this._func;
+                itemDescription = this.func;
             }
 		}
 		return itemDescription;
     }
     
     identify(){
-		this._identified = 1;
+		this.identified = 1;
     }
     
     polish(){

@@ -126,7 +126,7 @@ DC.Shop =  {
    if(DC.Shop.transactionType == 'buy'){
     // only player inventory
    }else{
-    if(DC.Player.hasEnoughForTransaction(40)){
+    if(DC.Player.cash >= 40){
      var item = DC.Inventory.getItem(DC.Shop.selectedItem);
      Socket.emit('shop-polish', {id: DC.models.Player.owner, itm: item});
 				}else{
@@ -142,7 +142,7 @@ DC.Shop =  {
 			if(DC.Shop.transactionType == 'buy'){
 				// only player inventory
 			}else{
-				if(DC.Player.hasEnoughForTransaction(40)){
+				if(DC.Player.cash >= 40){
 					var item = DC.Inventory.getItem(DC.Shop.selectedItem);
 					Socket.emit('shop-identify', item);
 				}else{
@@ -155,7 +155,6 @@ DC.Shop =  {
 	},
 	transaction: () => {
 		if(DC.Shop.selectedItem){
-			console.log(DC.Shop.selectedItem);
 			if(DC.Shop.transactionType == 'buy'){
 				DC.Shop.buy();
 			}else{
@@ -174,8 +173,10 @@ DC.Shop =  {
 	},
 	buy: () => {
 		var item = DC.Shop.getItem(DC.Shop.selectedItem);
+		var item = item[0];
 		item.qty = 1;
-		if(DC.Player.hasEnoughForTransaction(item.cost)){
+		console.log(item.cost);	if(DC.Player.cash >= item.cost){
+		 
 			Socket.emit('shop-buy', item);
 		}else{
 			DC.Tpl.buildModal("error", "Oops!", "<strong>You do not have enough Marks to purchase.</strong>");

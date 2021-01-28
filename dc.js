@@ -96,6 +96,7 @@ global.ShopController = require('./lib/controllers/shop');
 global.RegionController = require('./lib/controllers/region');
 global.EncounterController = require('./lib/controllers/encounter');
 global.ChatController = require('./lib/controllers/chat');
+global.InventoryController = require('./lib/controllers/inventory');
 
 const routes = require("./routes")(io);
 app.use(routes);
@@ -106,6 +107,7 @@ io.on('connection', function(socket){
 	ShopController.init(socket);
 	RegionController.init(socket);
 	EncounterController.init(socket);
+	InventoryController.init(socket);
 	ChatController.init(socket);
 });
 
