@@ -78,7 +78,7 @@
 			{{/if}}
 		</div>
 		<div class="col-8">
-			{{#if items}}
+			{{#if hasItems}}
 			<ul class="shop-item-container" style="overflow:auto;height:85%;">
 			{{#each items}}
 				<li data-id="{{id}}" class="shop-item">{{name}}{{#if attack}} +{{attack}}a{{/if}}{{#if defend}}+{{defend}}d{{/if}} - ${{cost}}</li>

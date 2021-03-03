@@ -4,50 +4,63 @@
 	<title>{{pageTitle}} &bull; Dragon Court</title>
 
 	<meta charset="iso-8859-1">
-	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	
+	<!-- css begin -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<style>
-	@font-face {
-	 font-family: "Lombardic";
-	 src: url("/fonts/Lombardic.ttf") format("truetype");
-	}
-	@font-face {
-	 font-family: "Jarrow";
-	 src: url("/fonts/Jarrow.ttf") format("truetype");
-	}
-	</style>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+ <link href="https://fonts.googleapis.com/css2?family=Almendra+SC&family=Amarante&family=Buda:wght@300&family=Calligraffitti&family=Euphoria+Script&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="/css/site.css">
+	
+	<!-- css end -->
+	
+	<!-- js begin -->
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
-	<script type="text/javascript" src="/js/vendor/socket-io-client.js"></script>
-	
-	<script>
-	var DC = {
-	  host: '{{globalVar "host"}}',
-	  port: {{globalVar "port"}}
-	 };
-	</script>
+	<script src="/js/lib/ajax.js"></script>
 	<script src="/js/preload.js"></script>
-	<script src="/js/tpl.js"></script>
-	<script src='/js/controllers/user.js'></script>
 	<script src="/js/main.js"></script>
-	
 	<script>
-	  DC.init = () => {
-	   DC.Tpl.init();
-	   DC.User.init();
-	  };
-	  DC.models = {
-	    User: {
-	      id: 0,
-	      name: '',
-	      firstRun: 1,
-	      hasChar: 0,
-	      chat: 0,
-	      token: '',
-	    }
-	  };
+	$(document).on('click', '#register', function(e){
+	 e.preventDefault();
+	 
+	 var username = $('input[name=username]').val(),
+	  email = $('input[name=email]').val(),
+	  password = $('input[name=password]').val();
+	 
+	 var data = {
+	  username: username,
+	  email: email,
+	  password: password
+	 };
+	 
+	 new Ajax('user/register/', data, (result) => {
+	  window.location = 'https://dragon-court.com/user/login/';
+	 });
+	});
+	
+	$(document).on('click', '#login', function(e){
+	 e.preventDefault();
+	 
+	 var username = $('input[name=username]').val(),
+	  password = $('input[name=password]').val();
+	  
+	 var data = {
+	  username: username,
+	  password: password
+	 };
+	
+	 new Ajax('user/login', data, (result) => {
+	  window.localStorage.token = result.token;
+	  window.location = 'https://dragon-court.com/game/?t='+result.token;
+	 });
+	});
+	
+	$(document).ready(function(){
+	 fbInit(document, 'script', 'facebook-jssdk');
+	});
 	</script>
-	<link rel="stylesheet" href="/css/site.css">
+	<!-- js end -->
 </head>
 <body>
 <div id="fb-root"></div>
@@ -59,8 +72,8 @@
 			<nav class="nav nav-masthead justify-content-center">
 				<a class="nav-link active" href="/">Main</a>
 				<!--
-				<a class="nav-link" href="/login/">Login</a>
-				<a class="nav-link" href="/register/">Register</a>
+				<a class="nav-link" href="/user/login/">Login</a>
+				<a class="nav-link" href="/user/register/">Register</a>
 				-->
 			</nav>
 		</div>
@@ -71,7 +84,7 @@
 	
 	<!-- Footer -->
 	<footer class="mastfoot mt-auto">
-		<p class="lead">Copyright &copy; 2019 - All Rights Reserved - <a href="#">Dragon Court Mobile</a></p>
+		<p class="lead">Copyright &copy; 2021 - All Rights Reserved - <a href="#">Dragon Court Mobile</a></p>
 		<div class="fb-like" data-href="https://www.facebook.com/DragonCourtMobile/" data-colorscheme="dark" data-layout="standard" data-action="like" data-size="large" data-show-faces="false" data-share="true"></div>
 		<p><a href="https://www.facebook.com/DragonCourtMobile/">DCMobile on FB</a></p>
 		<p><a href="mailto:jason.allen.oneal@gmail.com">jason dot allen dot oneal at gmail dot com</a></p>
