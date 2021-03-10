@@ -3,6 +3,8 @@ var Tpl = require('../../lib/tpl');
 
 const EncounterService = require('../../lib/services/encounter')();
 
+router.use(global.tokenAuth);
+
 router.post('/init', (req, res) => {
  EncounterService.get(Player.region, (creature) => {
   var {main, attack, flee} = Tpl.encounterBlurb();

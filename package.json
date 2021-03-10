@@ -1,13 +1,13 @@
 {
-  "name": "dctest",
-  "version": "1.0.0",
+  "name": "Dragon Court",
+  "version": "0.1.0",
   "description": "",
   "main": "app.js",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npx npm-force-resolutions",
     "start": "node app.js"
   },
   "nodemonConfig": {
@@ -19,7 +19,6 @@
   "author": "Jason O'Neal",
   "license": "ISC",
   "dependencies": {
-    "@mysql/xdevapi": "^8.0.23",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
@@ -27,11 +26,9 @@
     "express-handlebars": "^5.2.0",
     "express-validator": "^6.9.2",
     "jsonwebtoken": "^8.5.1",
-    "localStorage": "^1.0.4",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
-    "socket.io": "^3.1.0",
-    "socketio-jwt": "^4.6.2",
-    "websocket": "^1.0.33"
+    "npm-force-resolutions": "^0.0.10",
+    "pm2": "^4.5.5"
   }
 }

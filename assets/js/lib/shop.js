@@ -7,6 +7,7 @@ class Shop{
  
  constructor(type){
   this.type = type;
+  console.log(this.type);
   new Ajax('api/shop/init/', 'id='+this.type, (result) => {
    for(var i = 0; i < result.data.data.items.length; i++){
     var item = new Item(result.data.data.items[i].id, result.data.data.items[i].name, result.data.data.items[i].region, result.data.data.items[i].shop, result.data.data.items[i].guts, result.data.data.items[i].wits, result.data.data.items[i].charm, result.data.data.items[i].attack, result.data.data.items[i].defend, result.data.data.items[i].skill, result.data.data.items[i].cost, result.data.data.items[i].func, result.data.data.items[i].equippable, 1000, 0, 1, '', result.data.data.items[i].max_enchants, result.data.data.items[i].times_enchanted, result.data.data.items[i].in_storage, result.data.data.items[i].drop_rate, 1, 0, 0);

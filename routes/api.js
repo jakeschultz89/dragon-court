@@ -1,9 +1,11 @@
 const router = express.Router();
+
 var Tpl = require('../lib/tpl');
 
 const RegionService = require('../lib/services/region')();
-const UserService = require('../lib/services/user')();
 const PlayerService = require('../lib/services/player')();
+
+router.use(global.tokenAuth);
 
 router.post("/game/init", (req, res) => {
 	res.json({status: 'ok'});

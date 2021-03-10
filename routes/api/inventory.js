@@ -3,6 +3,8 @@ var Tpl = require('../../lib/tpl');
 
 const InventoryService = require('../../lib/services/inventory')();
 
+router.use(global.tokenAuth);
+
 router.post('/get', (req, res) => {
  InventoryService.get(User.id, (items) => {
   var r = {

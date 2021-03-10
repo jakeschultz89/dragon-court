@@ -3,7 +3,10 @@ var Tpl = require('../../lib/tpl');
 
 const ShopService = require('../../lib/services/shop')();
 
+router.use(global.tokenAuth);
+
 router.post('/init', (req, res) => {
+ console.log(req.body.id);
  ShopService.get(req.body.id, (result) => {
   var blurb = Tpl.shopBlurb(result.type);
   Tpl.render('shop', (html) => {

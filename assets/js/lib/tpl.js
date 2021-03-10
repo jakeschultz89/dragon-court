@@ -1,4 +1,8 @@
 class Tpl {
+ getTpl(data){
+  return Handlebars.compile(data.html);
+ }
+ 
  build(data){
   var template = Handlebars.compile(data.html);
   return template(data.data);

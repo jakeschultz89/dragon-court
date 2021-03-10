@@ -13,6 +13,7 @@ class Region {
    e.preventDefault();
     
    var type = $(this).data().id;
+   console.log(type);
    new Shop(type);
   });
    

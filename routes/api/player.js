@@ -3,6 +3,8 @@ var Tpl = require('../../lib/tpl');
 
 const PlayerService = require('../../lib/services/player')();
 
+router.use(global.tokenAuth);
+
 router.post("/get", (req, res) => {
  var id = req.body.id;
  PlayerService.get(id, function(result){

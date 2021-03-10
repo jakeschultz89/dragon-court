@@ -40,8 +40,14 @@ router.post('/register/', body('email').isEmail().normalizeEmail(), (req, res) =
   password: req.body.password
  };
  
- UserService.create(data, () => {
-  res.redirect('user/login/');
+ UserService.create(data, (uid) => {
+  PlayerService.create(uid, function(p){
+   if(p.id && data.uid){
+    CityService.create({name: data.name, owner: data.uid, x: 0, y: 0, realm: 1}, (city) => {
+    
+    });
+   }
+  });
  });
 });
 

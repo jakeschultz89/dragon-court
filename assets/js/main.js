@@ -3,6 +3,11 @@ for(var i = 0; i < IMGS.length; i++){
  $('head').append(preImg);
 }
 
+var isMobile = false;
+if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+ isMobile = true;
+}
+
 var xDown = null;
 var yDown = null;
 
